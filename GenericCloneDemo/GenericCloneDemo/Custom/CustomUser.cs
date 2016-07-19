@@ -1,8 +1,10 @@
-﻿namespace GenericCloneDemo.Custom
+﻿using System;
+using System.Linq;
+
+namespace GenericCloneDemo.Custom
 {
-    public class CustomUser
+    public class CustomUser : CustomModel
     {
-        public string Name { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -15,7 +17,13 @@
 
         public override string ToString()
         {
-            return $"{new string('-', 20)}\n\t{FullName}\t{Id}\n\t{GroupName}\n\tGroup Id: {CustomGroup.Id}{new string('-', 20)}";
+            string str = $"\t{FullName}\t{Id}\n\t{GroupName}\n\tGroup Id: {CustomGroup.Id}";
+
+            int max = str.Split('\n').Max(e => e.Replace("\t", new string(' ', 10)).Length);
+
+            string separator = new string('-', max);
+
+            return $"{separator}\n{str}\n{separator}\n";
         }
     }
 }

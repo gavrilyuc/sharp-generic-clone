@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace GenericCloneDemo
 {
-    public static class ExtensionObjectClone
+    public static class ObjectCloneExtension
     {
         /// <summary>
         /// Clone Object
@@ -27,14 +27,16 @@ namespace GenericCloneDemo
             foreach (PropertyInfo property in objType.GetProperties().Where(e => e.CanRead && e.CanWrite))
             {
                 object value = property.GetValue(a, null);
+
                 if (value != null)
                     property.SetValue(instance, value.Clone(), null);
             }
+
             if (!objType.IsArray) return instance;
 
             var ins = instance as IList;
 
-            if (ins == null) return a;
+            if (ins == null) return instance;
 
             foreach (object item in (IEnumerable)a)
                 ins.Add(item);
@@ -43,7 +45,7 @@ namespace GenericCloneDemo
         }
 
         private static readonly BinaryFormatter Formatter;
-        static ExtensionObjectClone()
+        static ObjectCloneExtension()
         {
             Formatter = new BinaryFormatter();
         }
