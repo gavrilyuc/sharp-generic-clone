@@ -36,8 +36,8 @@ namespace GenericCloneDemo
             System.Console.WriteLine();
             var clonedObject = customUser.Clone();
 
-            clonedObject.CustomGroup.Name = "Hi";
-            clonedObject.CustomGroup.SubName = "You Not Alone !";
+            clonedObject.Name = "Cloned Dmitry";
+            clonedObject.FirstName = "Cloned Havryliuk";
             clonedObject.Id = 15;
 
             Console.WriteLine("^yCloned and Changed Object:");
